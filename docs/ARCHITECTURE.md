@@ -1,0 +1,3 @@
+# Kiến trúc
+
+Electron main quản lý cửa sổ, thư mục dữ liệu và bản băm mật khẩu trên Windows. Preload chỉ cung cấp các IPC cần dùng. Capacitor đóng gói cùng giao diện web cho Android; `securityBridge` cung cấp hàm băm mật khẩu cục bộ cho thiết bị không có Electron. React renderer chia thành `App` (điều hướng và dữ liệu), `Features` (công việc, lịch, danh mục), `Finance` (thu chi và biểu đồ, chỉ tải khi mở trang), `NativeInput` (ô nhập cho UniKey), `Security` (khóa giao diện) và `i18n` (Anh/Việt). Công việc, thu chi và danh mục vẫn nằm trong localStorage với các khóa cũ để giữ dữ liệu. SQLite chưa triển khai; khi có, chỉ truy cập từ main process trên Windows hoặc tầng native Android.

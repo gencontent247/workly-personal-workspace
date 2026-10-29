@@ -1,0 +1,63 @@
+{
+  "name": "personal-workspace",
+  "version": "1.5.0",
+  "private": true,
+  "type": "module",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && npm run electron:compile && electron .\"",
+    "web": "vite --host 127.0.0.1",
+    "electron:compile": "tsc -p electron/tsconfig.json && node scripts/write-electron-package.cjs",
+    "build": "tsc -b && vite build && npm run electron:compile",
+    "build:web": "tsc -b && vite build",
+    "android:sync": "npm run build:web && cap sync android",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "typecheck": "tsc -b --pretty false"
+  },
+  "dependencies": {
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.5.3",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.15.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "typescript": "~5.7.3",
+    "vite": "^6.0.5",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.personalworkspace.desktop",
+    "productName": "Personal Workspace",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "requestedExecutionLevel": "asInvoker",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": false
+    }
+  }
+}

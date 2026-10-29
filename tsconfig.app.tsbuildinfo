@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/app/app.tsx","./src/app/externallink.tsx","./src/app/features.tsx","./src/app/finance.tsx","./src/app/nativeinput.tsx","./src/app/security.tsx","./src/app/i18n.tsx","./src/app/model.ts","./src/app/securitybridge.ts"],"version":"5.7.3"}
